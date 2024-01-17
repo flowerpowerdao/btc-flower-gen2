@@ -50,12 +50,12 @@ let filesByName = new Map(files.map((file) => {
 
 // TODO: remove
 // populate with fake data for cherries
-let assets = JSON.parse(fs.readFileSync(path.resolve(assetsDir, 'metadata.json')).toString());
-for (let i = 0; i < assets.length; i++) {
-  filesByName.set(String(i + 1), `${i + 1}.svg`);
-  filesByName.set(String(i + 1) + '_thumbnail', `${i + 1}_thumbnail.png`);
-}
-filesByName.set('placeholder', 'placeholder.mp4');
+// let assets = JSON.parse(fs.readFileSync(path.resolve(assetsDir, 'metadata.json')).toString());
+// for (let i = 0; i < assets.length; i++) {
+//   filesByName.set(String(i), `${i}.svg`);
+//   filesByName.set(String(i) + '_thumbnail', `${i}_thumbnail.png`);
+// }
+// filesByName.set('placeholder', 'placeholder.mp4');
 
 let run = async () => {
   deployNftCanister();
@@ -128,7 +128,7 @@ let uploadAssetsMetadata = async () => {
   for (let chunk of chunks) {
     let metadataChunk = chunk.map(([index, metadata]) => {
       return {
-        name: String(index + 1),
+        name: String(index),
         payload: {
           ctype: '',
           data: [],
@@ -138,8 +138,8 @@ let uploadAssetsMetadata = async () => {
           ctype: 'application/json',
           data: [new TextEncoder().encode(JSON.stringify(metadata))],
         }],
-        payloadUrl: [getAssetUrl(String(index + 1))],
-        thumbnailUrl: [getAssetUrl(String(index + 1) + '_thumbnail')],
+        payloadUrl: [getAssetUrl(String(index))],
+        thumbnailUrl: [getAssetUrl(String(index) + '_thumbnail')],
       };
     });
 
