@@ -16,15 +16,26 @@ let icpFlower = createActor('4ggk4-mqaaa-aaaae-qad6q-cai', options);
   let ethFlowerHolders = (await ethFlower.getRegistry()).map((x) => x[1]);
   let icpFlowerHolders = (await icpFlower.getRegistry()).map((x) => x[1]);
 
-  let trilogyHoldersUniq = Array.from(new Set(btcFlowerHolders.filter((x) => ethFlowerHolders.includes(x) && icpFlowerHolders.includes(x))));
-  let btcFlowerHoldersUniq = Array.from(new Set(btcFlowerHolders));
-  let icpEthFlowerHoldersUniq = Array.from(new Set([...ethFlowerHolders, ...icpFlowerHolders]))
+  let btcFlowerHoldersUniq = new Set(btcFlowerHolders);
+  let trilogyHolders = [];
+  for (let address of btcFlowerHoldersUniq) {
+    let btcCount = btcFlowerHolders.filter((x) => x === address).length;
+    let ethCount = ethFlowerHolders.filter((x) => x === address).length;
+    let icpCount = icpFlowerHolders.filter((x) => x === address).length;
+    let trilogyCount = Math.min(...[btcCount, ethCount, icpCount]);
 
-  console.log('trilogy holders', trilogyHoldersUniq.length);
-  console.log('btc flower holders', btcFlowerHoldersUniq.length);
-  console.log('icp or eth flower holders', icpEthFlowerHoldersUniq.length);
+    if (trilogyCount) {
+      trilogyHolders.push(...Array(trilogyCount).fill(address));
+    }
+  }
 
-  writeFileSync('holders-trilogy.txt', '"' + trilogyHoldersUniq.join('";\n"') + '";');
-  writeFileSync('holders-btc-flower.txt', '"' + btcFlowerHoldersUniq.join('";\n"') + '";');
-  writeFileSync('holders-icp-eth-flower.txt', '"' + icpEthFlowerHoldersUniq.join('";\n"') + '";');
+  let icpEthFlowerHolders = [...ethFlowerHolders, ...icpFlowerHolders];
+
+  console.log('trilogy holders', trilogyHolders.length);
+  console.log('btc flower holders', btcFlowerHolders.length);
+  console.log('icp and eth flower holders', icpEthFlowerHolders.length);
+
+  writeFileSync('holders-trilogy.txt', '"' + trilogyHolders.join('";\n"') + '";');
+  writeFileSync('holders-btc-flower.txt', '"' + btcFlowerHolders.join('";\n"') + '";');
+  writeFileSync('holders-icp-eth-flower.txt', '"' + icpEthFlowerHolders.join('";\n"') + '";');
 })();
