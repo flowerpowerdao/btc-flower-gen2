@@ -18,7 +18,7 @@ let dfxNetwork = network === 'local' || network === 'test' ? 'local' : 'ic';
 let initArgsFile = network === 'local' || network === 'test' ? 'initArgs.local.did' : 'initArgs.did';
 
 let mode = argv.mode || '';
-let modeArg = mode === 'reinstall' ? `--mode=${mode}` : '';
+let modeArg = mode === 'reinstall' ? `--mode=${mode}` : '--mode=auto';
 
 // skip prompt for local reinstall
 if (dfxNetwork === 'local' && mode === 'reinstall') {
@@ -84,7 +84,8 @@ let getAssetUrl = (filename) => {
 let deployNftCanister = () => {
   console.log(chalk.green('Deploying nft canister...'));
   console.log(`Using init args from ${initArgsFile}`);
-  execSync(`dfx deploy ${nftCanisterName} --no-wallet --argument "$(cat ${initArgsFile})" --network ${dfxNetwork} ${modeArg} ${withCyclesArg}`, execOptions);
+  execSync(`dfx build ${nftCanisterName}`, execOptions);
+  execSync(`dfx canister install ${nftCanisterName} --argument-file ${initArgsFile} --network ${dfxNetwork} ${modeArg} ${withCyclesArg}`, execOptions);
 }
 
 // let deployAssetsCanister = () => {
