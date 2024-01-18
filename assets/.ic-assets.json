@@ -1,6 +1,9 @@
 [
-  {
-    "match": "**/*",
-    "allow_raw_access": true
-  }
+	{
+		"match": "**/*",
+		"allow_raw_access": true,
+		"headers": {
+			"Cache-Control": "public, max-age=86400"
+		}
+	}
 ]
