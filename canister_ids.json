@@ -1,0 +1,11 @@
+{
+  "production": {
+    "ic": "u2kyg-aaaaa-aaaag-qc5ja-cai"
+  },
+  "assets": {
+    "ic": "ryt42-waaaa-aaaap-qb6qq-cai"
+  },
+  "staging": {
+    "ic": "ubcso-fqaaa-aaaan-qlrca-cai"
+  }
+}

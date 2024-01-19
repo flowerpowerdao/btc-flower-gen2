@@ -1,10 +1,10 @@
 (
-  principal "ubcso-fqaaa-aaaan-qlrca-cai", // production canister
+  principal "u2kyg-aaaaa-aaaag-qc5ja-cai", // production canister
   record {
     name = "BTC Flower Gen 2.0";
     sale = variant { supply = 2009 };
-    salePrice = 1300000; // 0.013 ICP
-    publicSaleStart = 1705663500000000000; // 2024-01-26 15:00 UTC
+    salePrice = 750_000_000; // 7.5 ICP
+    publicSaleStart = 1706281200000000000; // 2024-01-26 15:00 UTC
     salesDistribution = vec {
       record { "203b33afcfe22a3727be0a2eb1b90274d2c789754939e4671a7b2480e3d8c774"; 73000 }; // ludo
       record { "719d835b163351619acef12d0847257ae9995571313c3414e3f0f90eab2a5675"; 25000 }; // zen
@@ -12,7 +12,7 @@
     };
     royalties = vec {
       record { "203b33afcfe22a3727be0a2eb1b90274d2c789754939e4671a7b2480e3d8c774"; 5475 }; // ludo
-      record { "719d835b163351619acef12d0847257ae9995571313c3414e3f0f90eab2a5675"; 1500 }; // zen
+      record { "719d835b163351619acef12d0847257ae9995571313c3414e3f0f90eab2a5675"; 1875 }; // zen
       record { "20eacca23f6ff96941099da3cbf705f7466c1a7e963b87a4ec87be7d678f4a19"; 150 }; // moritz
     };
     marketplaces = vec {
@@ -23,43 +23,43 @@
     };
     // How long to delay assets shuffling and reveal (starting after 'publicSaleStart')
     // variant { none } - assets will be revealed immediately and assets shuffling will be disabled
-    revealDelay = variant { minutes = 5 };
+    revealDelay = variant { hours = 24 };
     // revealDelay = variant { none };
     airdrop = vec {};
     whitelists = vec {
       record {
         name = "trilogy";
-        price = 1000000; // 0.01 ICP
+        price = 300000000; // 3 ICP
         oneTimeOnly = true; // whitelist addresses are removed after purchase
-        startTime = 1705662600000000000; // 2024-01-23 15:00 UTC
-        endTime = opt 1705662900000000000; // 2024-01-24 15:00 UTC
+        startTime = 1706022000000000000; // 2024-01-23 15:00 UTC
+        endTime = opt 1706108400000000000; // 2024-01-24 15:00 UTC
         addresses = vec {
-          "91d8f0381db3af29d386f220ae1e5cc2ed7fd468597e0a65a633f72947bc79c0";
+          "da1fae1e25a417ab70953983a0c83ae5d7ee68ea83b1ac7b291246a29c87cc04";
+          "d29028c05d4b3a4e54b2c9040dd6d5acf8d79308b28344898729a0de0a52b241";
           // ...
         };
       };
       record {
         name = "btcflower";
-        price = 1100000; // 0.011 ICP
+        price = 350000000; // 3.5 ICP
         oneTimeOnly = true; // whitelist addresses are removed after purchase
-        startTime = 1705662900000000000; // 2024-01-24 15:00 UTC
-        endTime = opt 1705663200000000000; // 2024-01-25 15:00 UTC
+        startTime = 1706108400000000000; // 2024-01-24 15:00 UTC
+        endTime = opt 1706194800000000000; // 2024-01-25 15:00 UTC
         addresses = vec {
-          "91d8f0381db3af29d386f220ae1e5cc2ed7fd468597e0a65a633f72947bc79c0";
-          "91d8f0381db3af29d386f220ae1e5cc2ed7fd468597e0a65a633f72947bc79c0";
+          "da1fae1e25a417ab70953983a0c83ae5d7ee68ea83b1ac7b291246a29c87cc04";
+          "d29028c05d4b3a4e54b2c9040dd6d5acf8d79308b28344898729a0de0a52b241";
           // ...
         };
       };
       record {
         name = "eth-icp-flower";
-        price = 1200000; // 0.012 ICP
+        price = 500000000; // 5 ICP
         oneTimeOnly = true; // whitelist addresses are removed after purchase
-        startTime = 1705663200000000000; // 2024-01-25 15:00 UTC
-        endTime = opt 1705663500000000000; // 2024-01-26 15:00 UTC
+        startTime = 1706194800000000000; // 2024-01-25 15:00 UTC
+        endTime = opt 1706281200000000000; // 2024-01-26 15:00 UTC
         addresses = vec {
-          "91d8f0381db3af29d386f220ae1e5cc2ed7fd468597e0a65a633f72947bc79c0";
-          "91d8f0381db3af29d386f220ae1e5cc2ed7fd468597e0a65a633f72947bc79c0";
-          "91d8f0381db3af29d386f220ae1e5cc2ed7fd468597e0a65a633f72947bc79c0";
+          "da1fae1e25a417ab70953983a0c83ae5d7ee68ea83b1ac7b291246a29c87cc04";
+          "d29028c05d4b3a4e54b2c9040dd6d5acf8d79308b28344898729a0de0a52b241";
           // ...
         };
       };
