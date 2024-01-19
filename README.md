@@ -32,6 +32,7 @@ If you want to upgrade an existing nft canister, see [upgrade nft canister](#upg
 ## Create canisters
 If you want to create canisters w/o using cycles wallet:
 ```
+dfx identity use <identity>
 dfx ledger create-canister --amount 0.1 --network ic $(dfx identity get-principal)
 ```
 
