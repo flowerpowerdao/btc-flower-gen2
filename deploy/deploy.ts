@@ -37,7 +37,10 @@ let actor = getActor(network, identity);
 if (mode === 'reinstall') {
   console.log(chalk.yellow('REINSTALL MODE'));
 }
-console.log('Controller', identity.getPrincipal().toText());
+console.log(chalk.yellow(`Identity: ${identityName}`));
+console.log(chalk.yellow(`Controller: ${identity.getPrincipal().toText()}`));
+console.log(chalk.yellow(`Canister: ${nftCanisterName}`));
+console.log(chalk.yellow(`Network: ${dfxNetwork}`));
 
 let dirContent = fs.readdirSync(assetsDir);
 let files = dirContent.filter((item) => {
@@ -82,9 +85,10 @@ let getAssetUrl = (filename) => {
 }
 
 let deployNftCanister = () => {
-  console.log(chalk.green('Deploying nft canister...'));
-  console.log(`Using init args from ${initArgsFile}`);
-  execSync(`dfx build ${nftCanisterName}`, execOptions);
+  console.log(chalk.yellow(`Using init args from ${initArgsFile}`));
+  console.log(chalk.green('Building nft canister...'));
+  execSync(`dfx build ${nftCanisterName} --network ${dfxNetwork}`, execOptions);
+  console.log(chalk.green('Installing nft canister...'));
   execSync(`dfx canister install ${nftCanisterName} --argument-file ${initArgsFile} --network ${dfxNetwork} ${modeArg} ${withCyclesArg}`, execOptions);
 }
 
