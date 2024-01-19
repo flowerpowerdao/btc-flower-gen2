@@ -681,6 +681,8 @@ type Canister =
                            text;
                            Frontend;
                          });
+   /// * Returns canister information based on passed parameters.
+   ///     * Called from browser.
    getCanistergeekInformation: (GetInformationRequest) ->
     (GetInformationResponse) query;
    getChunkCount: (nat) -> (nat) query;
@@ -742,7 +744,10 @@ type Canister =
    tokens: (AccountIdentifier__3) -> (Result_1) query;
    tokens_ext: (AccountIdentifier__3) -> (Result) query;
    transactions: () -> (vec TransactionV2) query;
+   transactionsPaged: (nat, nat) -> (vec Transaction, nat) query;
    transfer: (TransferRequest) -> (TransferResponse);
+   /// * Updates canister information based on passed parameters at current time.
+   ///     * Called from browser or any canister "update" method.
    updateCanistergeekInformation: (UpdateInformationRequest) -> ();
    updateThumb: (text, File) -> (opt nat);
  };
