@@ -11,7 +11,7 @@ backup/data/*
 test/e2e/initArgs.did
 
 # remove or comment out the lines below in your forked NFT collection repository
-initArgs.did
-canister_ids.json
+# initArgs.did
+# canister_ids.json
 assets/*
 !assets/.ic-assets.json
