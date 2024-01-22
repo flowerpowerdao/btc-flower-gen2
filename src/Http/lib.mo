@@ -140,7 +140,7 @@ module {
 
       var whitelistsText = "";
       for (whitelist in config.whitelists.vals()) {
-        whitelistsText #= whitelist.name # " " # _displayICP(Nat64.toNat(whitelist.price)) # "start: " # debug_show (whitelist.startTime) # ", end: " # debug_show (whitelist.endTime) # "; ";
+        whitelistsText #= whitelist.name # " " # _displayICP(Nat64.toNat(whitelist.price)) # ", start: " # debug_show (whitelist.startTime) # ", end: " # debug_show (whitelist.endTime) # "; ";
       };
 
       return {
