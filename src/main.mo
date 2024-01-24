@@ -185,13 +185,35 @@ shared ({ caller = init_minter }) actor class Canister(cid : Principal, initArgs
 
     let timersInterval = Utils.toNanos(Option.get(config.timersInterval, #seconds(60)));
 
+    // force run needed in case of failed cron jobs (when inProgress is stuck to true)
+    // allow force run every 15 minutes
+    let forceInterval = Utils.toNanos(#minutes(15));
+
+    var inProgress = false;
+    var lastCron = Time.now();
+
     _timerId := Timer.recurringTimer(
       #nanoseconds(timersInterval),
       func() : async () {
-        ignore cronSettlements();
-        ignore cronDisbursements();
-        ignore cronSalesSettlements();
-        ignore cronFailedSales();
+        if (inProgress and Time.now() < lastCron + forceInterval) {
+          return;
+        };
+        inProgress := true;
+        lastCron := Time.now();
+
+        try {
+          let settlementsPromise = cronSettlements();
+          let disbursementsPromise = cronDisbursements();
+          let salesSettlementsPromise = cronSalesSettlements();
+          let failedSalesPromise = cronFailedSales();
+
+          await settlementsPromise;
+          await disbursementsPromise;
+          await salesSettlementsPromise;
+          await failedSalesPromise;
+        } catch (e) {};
+
+        inProgress := false;
       },
     );
 
