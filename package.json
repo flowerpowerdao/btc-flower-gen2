@@ -33,7 +33,8 @@
     "test-br": "npm run deploy-test && tsx ./backup/test.ts",
     "test-br-assets": "tsx ./backup/test-assets.ts",
     "deploy": "tsx ./deploy/deploy.ts",
-    "upgrade-production": "dfx canister --network ic stop production && DFX_MOC_PATH=\"$(vessel bin)/moc\" dfx deploy --network ic production --upgrade-unchanged --argument \"$(cat initArgs.did)\" && dfx canister --network ic start production",
+    "upgrade-staging": "dfx canister --network ic stop staging && DFX_MOC_PATH=\"$(vessel bin)/moc\" dfx build staging --network ic && dfx canister install staging --network ic --upgrade-unchanged --argument-file initArgs.local.did && dfx canister start staging --network ic",
+    "upgrade-production": "dfx canister --network ic stop production && DFX_MOC_PATH=\"$(vessel bin)/moc\" dfx build production --network ic && dfx canister install production --network ic --upgrade-unchanged --argument-file initArgs.did && dfx canister start production --network ic",
     "": ""
   },
   "devDependencies": {

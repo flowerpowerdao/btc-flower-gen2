@@ -23,6 +23,7 @@
     // variant { none } - assets will be revealed immediately and assets shuffling will be disabled
     revealDelay = variant { hours = 24 };
     // revealDelay = variant { none };
+    timersInterval = opt variant { minutes = 2 };
     airdrop = vec {};
     whitelists = vec {
       record {
