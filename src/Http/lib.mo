@@ -41,6 +41,10 @@ module {
 
     public func http_request(request : Types.HttpRequest) : Types.HttpResponse {
       let path = Iter.toArray(Text.tokens(request.url, #text("/")));
+
+      /**********************
+      * TOKEN INDEX LOOKUP *
+      **********************/
       switch (_getParam(request.url, "tokenid")) {
         case (?tokenid) {
           // start custom
@@ -69,6 +73,10 @@ module {
         };
         case (_) {};
       };
+
+      /**********************
+      * ASSET INDEX LOOKUP *
+      **********************/
       switch (_getParam(request.url, "asset")) {
         case (?atext) {
           switch (Utils.natFromText(atext)) {
@@ -93,7 +101,6 @@ module {
       /**********************
       * TOKEN INDEX LOOKUP *
       **********************/
-
       // check if there's only on "argument" to it
       if (path.size() == 1) {
         let parts = Iter.toArray(Text.split(path[0], #text("?")));
