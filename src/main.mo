@@ -179,9 +179,13 @@ shared ({ caller = init_minter }) actor class Canister(cid : Principal, initArgs
   };
 
   // timers
-  func _setTimers() {
+  func _cancelTimers() {
     Timer.cancelTimer(_timerId);
     Timer.cancelTimer(_revealTimerId);
+  };
+
+  func _setTimers() {
+    _cancelTimers();
 
     let timersInterval = Utils.toNanos(Option.get(config.timersInterval, #seconds(60)));
 
@@ -235,6 +239,16 @@ shared ({ caller = init_minter }) actor class Canister(cid : Principal, initArgs
         },
       );
     };
+  };
+
+  public shared ({ caller }) func setTimers() : async () {
+    assert (caller == init_minter);
+    _setTimers();
+  };
+
+  public shared ({ caller }) func cancelTimers() : async () {
+    assert (caller == init_minter);
+    _cancelTimers();
   };
 
   /*************
@@ -357,6 +371,12 @@ shared ({ caller = init_minter }) actor class Canister(cid : Principal, initArgs
     canistergeekMonitor.collectMetrics();
     // checks caller == minter
     _Assets.addAssets(caller, assets);
+  };
+
+  public shared ({ caller }) func shuffleAssets() : async Bool {
+    assert (caller == init_minter);
+    await _Assets.shuffleAssets();
+    _Assets.isShuffled();
   };
 
   // Sale
